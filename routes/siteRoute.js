@@ -34,6 +34,12 @@ module.exports = (io) => {
 
   router.get('/usuarioadmin', UsuarioadminController.renderUsuarioadmin);
 
+  router.get('/minhasreservas', UsuarioadminController.renderMinhasreservas);
+
+  router.get('/nome', UsuarioadminController.renderNome);
+
+  router.get('/senha', UsuarioadminController.renderSenha);
+
   return router;
 
 };
