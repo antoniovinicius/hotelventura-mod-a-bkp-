@@ -18,11 +18,20 @@ let defaultContato = {
     body: {}
 };
 
-let defaultsReservas = {
+let defaultReservas = {
     title: 'Reserva - Hotel Ventura',
     header: {
         background: 'images/img_bg_2.jpg',
         title: 'Reserve um quarto!'
+    },
+    body: {}
+};
+
+let defaultSenha = {
+    title: 'Administração do Usuário - Hotel Ventura',
+    header: {
+      background: 'images/img_bg_6.jpg',
+      title: 'Administração do Usuário'
     },
     body: {}
 };
@@ -108,7 +117,7 @@ module.exports = (io) => {
                 conn.query(
                 "SELECT * FROM tb_quartos ORDER BY tarifa",
                 (err, results, fields) => {
-                    res.render('site/reservas', Object.assign({}, defaults, defaultsReservas, {
+                    res.render('site/reservas', Object.assign({}, defaults, defaultReservas, {
                     quartos: results,
                     body: req.body,
                     success,
@@ -220,6 +229,144 @@ module.exports = (io) => {
                     }
                 })
             });
-        }
+        },
+        nome() {
+
+            return new Promise((s, f) => {
+
+                conn.query(
+                    `
+                    SELECT nome FROM tb_usuarios WHERE id_usuario = 4
+                `,
+                    (err, results) => {
+
+                        if (err) {
+                            f(err);
+                        } else {
+                            s(results);
+                        }
+
+                    }
+                );
+
+            });
+
+        },
+        nomeUpdate(req, res) {
+            return new Promise((s, f) => {
+
+                let form = new formidable.IncomingForm();
+
+                form.parse(req, (err, fields, files) => {
+                    if (!fields.nomenovo) {
+                        res.status(400);
+                        res.send({
+                        error: 'Preencha o campo novo nome.'
+                        });
+                    } else {
+                        conn.query(
+                        "UPDATE tb_usuarios SET nome = ? WHERE id_usuario = 4",
+                        [
+                            fields.nomenovo
+                        ],
+                        (err, results) => {
+                
+                            if (err) {
+                
+                            res.status(400);
+                            res.send({
+                                error: err
+                            });
+                
+                            } else {
+                
+                            io.emit('reservations update', fields);
+                
+                            res.send(results);
+                
+                            }
+                        })
+                    }
+                })
+            });
+        },
+        contatosSave(req, res) {
+
+            let render = (error, success) => {
+
+                res.render('site/contatos', Object.assign({}, defaults, defaultContato, {
+                  body: req.body,
+                  success,
+                  error
+                }));
+          
+            };
+
+            return new Promise((s, f) => {
+
+                if (!req.body.nome) {
+                    render('Preencha o campo Nome.');
+                } else if (!req.body.email) {
+                    render('Preencha o campo E-mail.');
+                } else if (!req.body.mensagem) {
+                    render('Preencha o campo Mensagem.');
+                } else {
+                    conn.query(
+                    "INSERT INTO tb_contatos (nome, email, mensagem) VALUES(?, ?, ?)",
+                    [
+                        req.body.nome,
+                        req.body.email,
+                        req.body.mensagem
+                    ],
+                    (err, results) => {
+                        if (err) {
+                        render(err);
+                        } else {
+                        io.emit('reservations update', req.body);
+                        req.body = {};
+                        render(null, 'Contato enviado com sucesso!');
+                        }}
+                    );
+                }
+            });
+        },
+        senhaSave(req, res) {
+
+            let render = (error, success) => {
+
+                res.render('site/senha', Object.assign({}, defaults, defaultSenha, {
+                  body: req.body,
+                  success,
+                  error
+                }));
+          
+
+                
+            };
+
+            return new Promise((s, f) => {
+
+                if (!req.body.senha) {
+                    render('Preencha o campo Nova Senha.');
+                } else if (!req.body.senhaConfirm) {
+                    render('Preencha o campo Confirmar Senha.');
+                } else {
+                    conn.query(
+                    "UPDATE tb_usuarios SET senha = ? WHERE id_usuario = 4",
+                    [
+                        req.body.senha
+                    ],
+                    (err, results) => {
+                        if (err) {
+                            render(err);
+                        } else {
+                            io.emit('reservations update', req.body);
+                            req.body = {};
+                            render(null, 'Senha atualizada com sucesso!');
+                        }}
+                    );
+                }
+            });
+        },
     }
 }

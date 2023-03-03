@@ -37,16 +37,44 @@ async function renderSenha(req, res, _next){
 }
 
 async function renderNome(req, res, _next){
-  res.render('site/nome', Object.assign({}, {
-      title: 'Administração do Usuário - Hotel Ventura',
-      header: {
-        background: 'images/img_bg_6.jpg',
-        title: 'Administração do Usuário'
-      },
-      headerIndex: false,
-      body: {}
+  site.nome().then(results => {
+    res.render('site/nome', Object.assign({}, {
+        title: 'Administração do Usuário - Hotel Ventura',
+        header: {
+          background: 'images/img_bg_6.jpg',
+          title: 'Administração do Usuário'
+        },
+        headerIndex: false,
+        data: results,
+        body: {}
     }));
+  });
 }
 
-module.exports = {renderUsuarioadmin, renderMinhasreservas, renderSenha, renderNome}
+async function alterarNome(req, res, next) {
+  site.nomeUpdate(req, res).then(data => {
+    res.send(data);
+}).catch(err => {
+    res.status(400);
+    res.send({
+        error: err
+    });
+});
+}
+
+async function criarSenha(req, res, next) {
+  site.senhaSave(req, res).then(data => {
+    res.send(data);
+
+}).catch(err => {
+
+    res.status(400);
+    res.send({
+        error: err
+    });
+
+});
+}
+
+module.exports = {renderUsuarioadmin, renderMinhasreservas, renderSenha, renderNome, alterarNome, criarSenha }
 

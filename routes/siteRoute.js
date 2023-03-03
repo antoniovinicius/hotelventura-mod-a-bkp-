@@ -34,11 +34,15 @@ module.exports = (io) => {
 
   router.get('/usuarioadmin', UsuarioadminController.renderUsuarioadmin);
 
+  router.post('/nome', UsuarioadminController.alterarNome);
+
   router.get('/minhasreservas', UsuarioadminController.renderMinhasreservas);
 
   router.get('/nome', UsuarioadminController.renderNome);
 
   router.get('/senha', UsuarioadminController.renderSenha);
+
+  router.post('/senha', UsuarioadminController.criarSenha);
 
   return router;
 

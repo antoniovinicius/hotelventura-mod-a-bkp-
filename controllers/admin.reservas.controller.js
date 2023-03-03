@@ -3,7 +3,7 @@ const moment = require('moment');
 moment.locale('pt-BR');
 
 async function getReserva(req, res, next){
-  req.query.start = (req.query.start) ? moment(req.query.start).format('YYYY-MM-DD') : moment().subtract(1, 'year').format('YYYY-MM-DD');
+        req.query.start = (req.query.start) ? moment(req.query.start).format('YYYY-MM-DD') : moment().subtract(1, 'year').format('YYYY-MM-DD');
         req.query.end = (req.query.end) ? moment(req.query.end).format('YYYY-MM-DD') : moment().format('YYYY-MM-DD');
     
         admin.reservas(req.query).then(pagination => {
