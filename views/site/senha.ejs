@@ -29,7 +29,7 @@
         </nav>
 
         <div class="col-md-12">
-          <div class="col-md-6 animate-box">
+          <div class="col-md-12 animate-box">
             <% if (typeof success==='string' ) { %>
               <div class="alert alert-success" role="alert">
                 <%=success%>
@@ -41,27 +41,27 @@
                   </div>
                   <% } %>
           </div>
-        </div>
 
-        <form action="/site/usuarioadmin/senha" method="post">
-          <input type="hidden" name="id_usuario">
-          <div class="modal-header">
-            <h4 class="modal-title">Alterar Senha</h4>
-          </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <label for="inputPassword">Nova Senha</label>
-              <input type="password" class="form-control" id="inputPassword" name="senha">
+          <form action="/senha" method="post">
+            <input type="hidden" name="id_usuario">
+            <div class="modal-header">
+              <h4 class="modal-title">Alterar Senha</h4>
             </div>
-            <div class="form-group">
-              <label for="inputPasswordConfirm">Confirmar Senha</label>
-              <input type="password" class="form-control" id="inputPasswordConfirm" name="senhaConfirm">
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="inputPassword">Nova Senha</label>
+                <input type="password" class="form-control" id="inputPassword" name="senha" value="<%=body.senha%>">
+              </div>
+              <div class="form-group">
+                <label for="inputPasswordConfirm">Confirmar Senha</label>
+                <input type="password" class="form-control" id="inputPasswordConfirm" name="senhaConfirm" value="<%=body.senhaConfirm%>">
+              </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-warning">Salvar</button>
-          </div>
-        </form>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-warning">Salvar</button>
+            </div>
+          </form>
+        </div> 
       </div>
     </div>
   </div>

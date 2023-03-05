@@ -14,7 +14,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">Menu</a>
+              <a class="navbar-brand" href="/usuarioadmin">Menu</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -29,41 +29,48 @@
         </nav>
 
         <div class="col-md-12">
-          <div class="col-md-6 animate-box">
-            <% if (typeof success==='string' ) { %>
-              <div class="alert alert-success" role="alert">
-                <%=success%>
+          <form action="/nome" method="post" id="form-alteranome">
+            <input type="hidden" name="id_usuario">
+            <div class="modal-header">
+              <h4 class="modal-title">Alterar Nome</h4>
+            </div>
+            <div class="modal-body">
+              <% data.forEach(function(data){ %>
+              <div class="form-group">
+                <label for="inputPassword">Nome Atual</label>
+                <input type="text" class="form-control" id="inputNomeatual" name="nomeatual" value="<%=data.nome%>" disabled>
               </div>
-              <% } %>
-                <% if (typeof error==='string' ) { %>
-                  <div class="alert alert-danger" role="alert"> <strong>Ops!</strong>
-                    <%=error%>
-                  </div>
-                  <% } %>
-          </div>
+              <% }); %>
+              <div class="form-group">
+                <label for="inputPasswordConfirm">Novo Nome</label>
+                <input type="text" class="form-control" id="inputNomenovo" name="nomenovo" required>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-warning">Salvar</button>
+            </div>
+          </form>
         </div>
-
-        <form action="/site/usuarioadmin/senha" method="post">
-          <input type="hidden" name="id_usuario">
-          <div class="modal-header">
-            <h4 class="modal-title">Alterar Nome</h4>
-          </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <label for="inputPassword">Nome Atual</label>
-              <input type="text" class="form-control" id="inputNomeatual" name="nomeatual" disabled>
-            </div>
-            <div class="form-group">
-              <label for="inputPasswordConfirm">Novo Nome</label>
-              <input type="text" class="form-control" id="inputNomenovo" name="nomenovo">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-warning">Salvar</button>
-          </div>
-        </form>
       </div>
     </div>
   </div>
 
-  <%- include('page-footer') -%>
+<script src="/js/formsave.js"></script>
+<script>
+
+    let formSubscribe = document.querySelector('#form-alteranome');
+
+    formSubscribe.submitAjax({
+        success: () => {
+            alert('Nome atualizado!');
+            formSubscribe.reset();
+            location.reload();
+        },
+        failure: error => {
+            alert('Erro ao submeter dado');
+        }
+    });
+    
+</script>
+
+<%- include('page-footer') -%>

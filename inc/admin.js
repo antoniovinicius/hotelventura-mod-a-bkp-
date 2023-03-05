@@ -275,7 +275,7 @@ module.exports = (io) => {
     reservas(params) {
       return new Promise((s, f) => {
         let pag = new Pagination(
-          "SELECT SQL_CALC_FOUND_ROWS * FROM tb_reservas JOIN tb_quartos q on q.id_quarto = fk_id_quarto WHERE data_inicio BETWEEN ? AND ? ORDER BY nome LIMIT ?, ?",
+          "SELECT SQL_CALC_FOUND_ROWS * FROM tb_reservas JOIN tb_quartos q on q.id_quarto = fk_id_quarto WHERE data_inicio BETWEEN ? AND ? ORDER BY data_inicio DESC LIMIT ?, ?",
           [params.start, params.end]
         );
 
