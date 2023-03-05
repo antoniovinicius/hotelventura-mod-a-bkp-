@@ -6,7 +6,8 @@ let moment = require('moment');
 
 let defaults = {
     title: 'Hotel Ventura',
-    headerIndex: false
+    headerIndex: false,
+    
 };
 
 let defaultContato = {

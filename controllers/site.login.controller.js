@@ -7,8 +7,10 @@ async function renderLogin(req, res, _next){
           background: 'images/img_bg_4.jpg',
           title: 'Faça seu Login!!'
         },
-        headerIndex: false,
-        body: {}
+      headerIndex: false,
+        isAuthenticated: req.isAuthenticated(),
+      body: {},
+        user:req.user
       }));
 }
 

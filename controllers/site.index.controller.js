@@ -6,7 +6,9 @@ async function renderHome(req, res, _next){
     res.render('site/index', Object.assign({}, {
         title: 'Hotel Ventura',
         quartos: results,
-        headerIndex: true
+      headerIndex: true,
+      isAuthenticated: req.isAuthenticated(),
+        user:req.user
     })) 
   });
 }

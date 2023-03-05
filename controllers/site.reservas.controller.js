@@ -12,8 +12,10 @@ async function renderReservas(req, res, _next){
         },
         quartos: results,
         headerIndex: false,
+        isAuthenticated: req.isAuthenticated(),
         moment,
-        body: {}
+        body: {},
+        user:req.user
       }))
   });
 }

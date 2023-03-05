@@ -134,7 +134,8 @@ class Grid {
                 success: response => {
                     this.fireEvent('afterFormCreate', [response]);
                 },
-                failure: () => {
+                failure: (erro) => {
+                    console.log(erro);
                     this.fireEvent('afterFormCreateError');
                 }
             });

@@ -7,8 +7,10 @@ async function renderUsuarioadmin(req, res, _next){
           background: 'images/img_bg_6.jpg',
           title: 'Administração do Usuário'
         },
-        headerIndex: false,
-        body: {}
+      headerIndex: false,
+        isAuthenticated: req.isAuthenticated(),
+      body: {},
+        user:req.user
       }));
 }
 
@@ -19,8 +21,10 @@ async function renderMinhasreservas(req, res, _next){
         background: 'images/img_bg_6.jpg',
         title: 'Administração do Usuário'
       },
-      headerIndex: false,
-      body: {}
+    headerIndex: false,
+      isAuthenticated: req.isAuthenticated(),
+    body: {},
+      user:req.user
     }));
 }
 
@@ -31,8 +35,10 @@ async function renderSenha(req, res, _next){
         background: 'images/img_bg_6.jpg',
         title: 'Administração do Usuário'
       },
-      headerIndex: false,
-      body: {}
+    headerIndex: false,
+      isAuthenticated: req.isAuthenticated(),
+    body: {},
+      user:req.user
     }));
 }
 
@@ -43,8 +49,10 @@ async function renderNome(req, res, _next){
         background: 'images/img_bg_6.jpg',
         title: 'Administração do Usuário'
       },
-      headerIndex: false,
-      body: {}
+    headerIndex: false,
+      isAuthenticated: req.isAuthenticated(),
+    body: {},
+      user:req.user
     }));
 }
 
