@@ -16,7 +16,7 @@ async function renderReservas(req, res, _next){
         moment,
         body: {},
         user:req.user
-      }))
+      })) 
   });
 }
 

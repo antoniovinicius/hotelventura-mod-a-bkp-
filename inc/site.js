@@ -3,11 +3,20 @@ let formidable = require('formidable');
 let path = require('path');
 let Pagination = require('./Pagination');
 let moment = require('moment');
+const crypto = require("crypto");
+
+function genPassword(password) {
+  console.log(password);
+  var salt = crypto.randomBytes(32).toString("hex");
+  var genhash = crypto
+    .pbkdf2Sync(password, salt, 10000, 60, "sha512")
+    .toString("hex");
+  return { salt: salt, hash: genhash };
+}
 
 let defaults = {
     title: 'Hotel Ventura',
-    headerIndex: false,
-    
+    headerIndex: false
 };
 
 let defaultContato = {
@@ -111,6 +120,24 @@ module.exports = (io) => {
                 }
             });
         },
+        reservas(req) {
+            return new Promise((s, f) => {
+                conn.query(
+                    "SELECT * FROM tb_reservas JOIN tb_quartos q on q.id_quarto = fk_id_quarto WHERE email = ? ORDER BY data_inicio DESC LIMIT 10",
+                    [
+                        req.user.email
+                    ],
+                    
+                    (err, results) => {
+    
+                        if (err) {
+                            f(err);
+                        } else {
+                            s(results);
+                        }
+                    })
+            });
+        },
         reservasSave(req, res) {
 
             let render = (error, success) => {
@@ -173,8 +200,6 @@ module.exports = (io) => {
                             diffdatas,
                             vlr_tot_reserva
                         ];
-    
-                        console.log(params); 
                         
                         conn.query(query, params, (err, results) => {
                             if (err) {
@@ -231,14 +256,15 @@ module.exports = (io) => {
                 })
             });
         },
-        nome() {
+        nome(req) {
 
             return new Promise((s, f) => {
 
                 conn.query(
-                    `
-                    SELECT nome FROM tb_usuarios WHERE id_usuario = 4
-                `,
+                    "SELECT nome FROM tb_usuarios WHERE id_usuario = ?",
+                    [
+                        req.user.id_usuario
+                    ],
                     (err, results) => {
 
                         if (err) {
@@ -254,6 +280,9 @@ module.exports = (io) => {
 
         },
         nomeUpdate(req, res) {
+
+            console.log(req);
+
             return new Promise((s, f) => {
 
                 let form = new formidable.IncomingForm();
@@ -266,9 +295,10 @@ module.exports = (io) => {
                         });
                     } else {
                         conn.query(
-                        "UPDATE tb_usuarios SET nome = ? WHERE id_usuario = 4",
+                        "UPDATE tb_usuarios SET nome = ? WHERE id_usuario = ?",
                         [
-                            fields.nomenovo
+                            fields.nomenovo,
+                            req.user.id_usuario
                         ],
                         (err, results) => {
                 
@@ -337,11 +367,10 @@ module.exports = (io) => {
 
                 res.render('site/senha', Object.assign({}, defaults, defaultSenha, {
                   body: req.body,
+                  isAuthenticated: req.isAuthenticated(),
                   success,
                   error
                 }));
-          
-
                 
             };
 
@@ -351,17 +380,19 @@ module.exports = (io) => {
                     render('Preencha o campo Nova Senha.');
                 } else if (!req.body.senhaConfirm) {
                     render('Preencha o campo Confirmar Senha.');
+                } else if (req.body.senha != req.body.senhaConfirm) {
+                    render('Senhas informadas não são iguais.');
                 } else {
+                    const { hash, salt } = genPassword(req.body.senhaConfirm);
                     conn.query(
-                    "UPDATE tb_usuarios SET senha = ? WHERE id_usuario = 4",
+                    "UPDATE tb_usuarios SET hash = ?, salt = ? WHERE id_usuario = ?",
                     [
-                        req.body.senha
+                        hash, salt, req.user.id_usuario
                     ],
                     (err, results) => {
                         if (err) {
                             render(err);
                         } else {
-                            io.emit('reservations update', req.body);
                             req.body = {};
                             render(null, 'Senha atualizada com sucesso!');
                         }}

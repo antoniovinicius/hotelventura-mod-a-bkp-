@@ -24,6 +24,23 @@
                         <%=quarto.descricao%>
                     </p>
                     </ul>
+                    <ul class="details">
+                        <p>
+                            <%=quarto.descricao%>
+                        </p>
+                    </ul>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th class="text-center"><span class="price cursive-font">Metragem</span> <span class="glyphicon glyphicon-resize-full"></span></th>
+                                <th class="text-center"><span class="price cursive-font">Máx. de Hóspedes</span> <span class="glyphicon glyphicon-user"></span></th></tr>
+                            <tr>
+                                <th class="text-center"><%=quarto.metragem%><span> m</span></th>
+                                <th class="text-center"><%=quarto.qt_hospedes_quarto%></th>
+                            </tr>
+                        </tbody>
+
+                    </table>
                 </div>
             </div>
             <% }); %>
