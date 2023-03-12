@@ -9,6 +9,7 @@ services:
     networks:
       - hotel_ventura_prod
 
+
   app_prod:
     build: ./
     container_name: hotel_ventura_app_prod
