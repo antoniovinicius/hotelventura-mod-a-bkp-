@@ -309,7 +309,7 @@ module.exports = (io) => {
 
                       query = `
                               UPDATE tb_reservas
-                              SET nome = ?, email = ?, qt_hospedes = ?, data_inicio = ?, data_fim = ?, fk_id_quarto = ?, qt_diarias = ?, vlr_tot_reserva = ?
+                              SET nome = ?, email = ?, qt_hospedes = ?, data_inicio = ?, data_fim = ?, fk_id_quarto = ?, status_reserva = ?, qt_diarias = ?, vlr_tot_reserva = ?
                               WHERE id_reserva = ?
                           `;
                       params = [
@@ -319,6 +319,7 @@ module.exports = (io) => {
                           fields.data_inicio,
                           fields.data_fim,
                           parseInt(fields.fk_id_quarto),
+                          "Aguardando aprovação",
                           diffdatas,
                           vlr_tot_reserva,
                           parseInt(fields.id_reserva)

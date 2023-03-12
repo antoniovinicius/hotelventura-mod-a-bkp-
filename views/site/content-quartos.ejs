@@ -35,10 +35,8 @@
                                         </span>
                                     </div>
                                 </div>
-
-
                                 <% } %>
-                                    <% }); %>
+                        <% }); %>
 
                     </div>
 
@@ -95,12 +93,12 @@
     $(document).ready(function () {
         $(".owl-carousel").owlCarousel({
             autoplay: true,
-
             autoplayTimeout: 6000,
             autoplayHoverPause: true,
             lazyLoad: true,
-            items: 1
-
+            items: 1,
+            nav:true,
+            navText: ['<i><</i>','<i>></i>']
         });
     });
 </script>
