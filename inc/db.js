@@ -6,7 +6,7 @@ const connection = mysql.createConnection({
     host: process.env.DB_HOST,
     user: 'user',
     database: 'hotelventura',
-    password: 'Us.123',
+    password: process.env.DB_PASSWORD,
     multipleStatements: true
 });
 
