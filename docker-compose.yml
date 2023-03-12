@@ -17,7 +17,6 @@ services:
     restart: on-failure
     depends_on:
       - db_prod
-      - redis
 
     environment:
       - DB_HOST=db_prod
