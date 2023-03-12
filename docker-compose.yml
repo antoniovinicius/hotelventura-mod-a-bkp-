@@ -1,31 +1,30 @@
 version: "3.0"
 
 services:
-  db:
+  db_prod:
     build: ./mysql
-    container_name: ventura_db
+    container_name: ventura_db_prod
     ports:
       - 3307:3306
     networks:
-      - hotel
+      - hotel_ventura_prod
 
-  app:
+  app_prod:
     build: ./
-    container_name: hotel_ventura_app
+    container_name: hotel_ventura_app_prod
     ports:
       - 3001:3000
     restart: on-failure
     depends_on:
-      - db
+      - db_prod
       - redis
 
     environment:
-      - DB_HOST=db
+      - DB_HOST=db_prod
       - CACHE_HOST=redis://localhost:6379
-      - WAIT_HOSTS=db:3307, redis:6379
       - WAIT_HOSTS_TIMEOUT=300
       - OAUTH_GOOGLE_CALLBACK=https://rendavolatil.com.br/auth/google/callback
     networks:
-      - hotel
+      - hotel_ventura_prod
 networks:
-  hotel:
+  hotel_ventura_prod:
