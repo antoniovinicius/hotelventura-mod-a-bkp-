@@ -42,6 +42,7 @@
                 <th data-fill-color="80808000" data-b-a-s>Quarto</th>
                 <th data-fill-color="80808000" data-b-a-s>Data Inicio</th>
                 <th data-fill-color="80808000" data-b-a-s>Data Fim</th>
+                <th data-fill-color="80808000" data-b-a-s>Valor da Reserva</th>
                 <th data-fill-color="80808000" data-b-a-s>Status</th>
                 <th style="min-width: 134px;" data-exclude="true">Ações</th>
               </tr>
@@ -63,6 +64,10 @@
                   </td>
                   <td data-b-a-s>
                     <%= moment(row.data_fim).format('DD [de] MMMM [de] YYYY') %>
+                  </td>
+                  <td data-b-a-s>
+                    <%= Intl.NumberFormat('pt-br', {style: 'currency' , currency: 'BRL'
+                              }).format(row.vlr_tot_reserva) %>
                   </td>
                   <td data-b-a-s>
                     <%= row.status_reserva %>
