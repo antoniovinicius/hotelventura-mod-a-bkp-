@@ -187,42 +187,41 @@
     </div>
     <!-- /.modal-dialog -->
   </div>
-  <% } else{ %>
-    <div>
-      <section>
-
-        <h2> Usuário do tipo <%- user['tipo_usuario'].toLowerCase() %> não tem permissão para acessar essa pagina.
-        </h2>
-      </section>
-    </div>
+  <%- include('inc/footer') -%>
+  <% } else { %>
+    <section class="content container-fluid">
+      <div class="box">
+        <div class="box-header">
+          <h3> Usuário do tipo <%- user['tipo_usuario'].toLowerCase() %> não tem permissão para acessar essa pagina. </h3>
+        </div>
+      </div>
+    </section>
     <% } %>
 
-      <%- include('inc/footer') -%>
+<script src="/js/formsave.js"></script>
+<script src="/js/grid.js"></script>
+<script>
 
-        <script src="/js/formsave.js"></script>
-        <script src="/js/grid.js"></script>
-        <script>
+  new Grid({
+    id: 'grid',
+    urlDelete: '/admin/usuarios/${data.id_usuario}',
+    textDeleteConfirm: 'Deseja realmente excluir o usuário ${data.nome}?',
+    listeners: {
+      clickRowButton: (btn, data, row, event) => {
 
-          new Grid({
-            id: 'grid',
-            urlDelete: '/admin/usuarios/${data.id_usuario}',
-            textDeleteConfirm: 'Deseja realmente excluir o usuário ${data.nome}?',
-            listeners: {
-              clickRowButton: (btn, data, row, event) => {
+        document.querySelector('#modal-update-password [name=id_usuario]').value = data.id_usuario;
 
-                document.querySelector('#modal-update-password [name=id_usuario]').value = data.id_usuario;
+      }
+    }
+  });
 
-              }
-            }
-          });
+  document.querySelector('#modal-update-password form').submitAjax({
+    success: () => {
+      window.location.reload();
+    },
+    failure: error => {
+      alert(error);
+    }
+  });
 
-          document.querySelector('#modal-update-password form').submitAjax({
-            success: () => {
-              window.location.reload();
-            },
-            failure: error => {
-              alert(error);
-            }
-          });
-
-        </script>
+</script>
