@@ -258,7 +258,7 @@ app.get(
 
 app.get(
   "/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/error" }),
+  passport.authenticate("google", { failureRedirect: "/login?failgoogle=true" }),
   function (req, res) {
     // Successful authentication, redirect success.
     res.redirect("/");
@@ -296,7 +296,7 @@ app.post("/register", userExists, (req, res, next) => {
     }
   );
 
-  res.redirect("/login");
+  res.redirect("/login?cadastro=true");
 });
 
 app.get("/logar", (req, res, next) => {
@@ -306,7 +306,7 @@ app.get("/logar", (req, res, next) => {
 app.post(
   "/login",
   passport.authenticate(strategy, {
-    failureRedirect: "/login-failure",
+    failureRedirect: "/login?fail=true",
     successRedirect: "/",
   })
 );
