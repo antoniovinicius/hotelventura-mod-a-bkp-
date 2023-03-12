@@ -8,13 +8,7 @@ services:
       - 3307:3306
     networks:
       - hotel
-  redis:
-    build: ./redis
-    container_name: ventura_redis
-    ports:
-      - 6379:6379
-    networks:
-      - hotel
+
   app:
     build: ./
     container_name: hotel_ventura_app
@@ -27,7 +21,7 @@ services:
 
     environment:
       - DB_HOST=db
-      - CACHE_HOST=redis://redis:6379
+      - CACHE_HOST=redis://localhost:6379
       - WAIT_HOSTS=db:3307, redis:6379
       - WAIT_HOSTS_TIMEOUT=300
       - OAUTH_GOOGLE_CALLBACK=https://rendavolatil.com.br/auth/google/callback
