@@ -20,7 +20,7 @@ services:
 
     environment:
       - DB_HOST=db_prod
-      - CACHE_HOST=redis://localhost:6379
+      - CACHE_HOST=redis://0.0.0.0:6379
       - WAIT_HOSTS_TIMEOUT=300
       - OAUTH_GOOGLE_CALLBACK=https://rendavolatil.com.br/auth/google/callback
     networks:
