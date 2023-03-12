@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `hotelventura` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `hotelventura`;
 -- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
 -- Host: localhost    Database: hotelventura
@@ -26,12 +24,12 @@ DROP TABLE IF EXISTS `tb_fotos_quartos`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tb_fotos_quartos` (
   `id_foto_quarto` int NOT NULL AUTO_INCREMENT,
-  `foto` varchar(128) DEFAULT NULL,
+  `foto` varchar(45) DEFAULT NULL,
   `fk_id_quarto` int DEFAULT NULL,
   PRIMARY KEY (`id_foto_quarto`),
   KEY `fk_id_quarto_idx` (`fk_id_quarto`),
   CONSTRAINT `fk_id_quarto` FOREIGN KEY (`fk_id_quarto`) REFERENCES `tb_quartos` (`id_quarto`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +38,7 @@ CREATE TABLE `tb_fotos_quartos` (
 
 LOCK TABLES `tb_fotos_quartos` WRITE;
 /*!40000 ALTER TABLE `tb_fotos_quartos` DISABLE KEYS */;
+INSERT INTO `tb_fotos_quartos` VALUES (7,'images/580716d633a26268caf550509.jpg',2),(8,'images/580716d633a26268caf55050a.jpg',2),(9,'images/cf5a0223dee2b885332b47601.jpg',1),(10,'images/cf5a0223dee2b885332b47602.jpg',1),(11,'images/cf5a0223dee2b885332b47604.jpg',10),(12,'images/cf5a0223dee2b885332b47605.jpg',10),(13,'images/cf5a0223dee2b885332b47607.jpg',12),(14,'images/cf5a0223dee2b885332b47608.jpg',12);
 /*!40000 ALTER TABLE `tb_fotos_quartos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-09  9:05:48
+-- Dump completed on 2023-03-12 17:49:33
