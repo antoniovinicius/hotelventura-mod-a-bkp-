@@ -3,7 +3,7 @@ const moment = require('moment');
 moment.locale('pt-BR');
 async function getUsuario(req, res, next){
   admin.usuarios().then(data => {
-
+    console.log(req.session.user)
     res.render('admin/usuarios', {
         url: req.url,
         user: req.session.user,

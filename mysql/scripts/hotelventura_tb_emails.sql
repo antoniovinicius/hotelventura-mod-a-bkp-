@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `hotelventura` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `hotelventura`;
 -- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
 -- Host: localhost    Database: hotelventura
@@ -26,7 +28,7 @@ CREATE TABLE `tb_emails` (
   `id_email` int NOT NULL AUTO_INCREMENT,
   `email` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_email`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,7 +37,7 @@ CREATE TABLE `tb_emails` (
 
 LOCK TABLES `tb_emails` WRITE;
 /*!40000 ALTER TABLE `tb_emails` DISABLE KEYS */;
-INSERT INTO `tb_emails` VALUES (1,'teste@teste.com'),(3,'antvinicius@gmail.com'),(4,'abc@abvc.com.br'),(5,'teste@test2.com'),(6,'geae@geage.com.br'),(7,'ger23@g3.com.br');
+INSERT INTO `tb_emails` VALUES (1,'teste@teste.com'),(3,'antvinicius@gmail.com'),(4,'abc@abvc.com.br'),(5,'teste@test2.com'),(6,'geae@geage.com.br'),(7,'ger23@g3.com.br'),(8,'teste222@teste222.com'),(9,'teste222@teste222.com'),(10,'usuario@example.com'),(11,'tee12e@t31qr.com'),(12,'usuario@example.com'),(13,'usuario@example.com'),(14,'usuario21@example.com'),(15,'usuario21@example.com'),(16,'usuario21@example.com'),(17,'usuario21@example.com'),(20,'usuario@usuario.com.br'),(21,'teste1@teste.com.br');
 /*!40000 ALTER TABLE `tb_emails` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -48,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-06 21:01:03
+-- Dump completed on 2023-03-09  9:05:48
