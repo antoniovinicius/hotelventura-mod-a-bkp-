@@ -190,7 +190,9 @@
   <% } else{ %>
     <div>
       <section>
-        <h2> Usuário do tipo <%user['tipo_usuario']%> não tem permissão para acessar essa pagina. </h2>
+
+        <h2> Usuário do tipo <%- user['tipo_usuario'].toLowerCase() %> não tem permissão para acessar essa pagina.
+        </h2>
       </section>
     </div>
     <% } %>
