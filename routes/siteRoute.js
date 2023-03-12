@@ -24,7 +24,8 @@ module.exports = (io) => {
 
   router.get('/reservas', ReservaController.renderReservas);
 
-  router.post('/reservas', ReservaController.criarReserva);
+    router.post('/reservas', ReservaController.criarReserva);
+    router.post('/reservas/edit', ReservaController.editReserva);
 
   router.get('/login', LoginController.renderLogin);
 
@@ -34,7 +35,9 @@ module.exports = (io) => {
 
   router.post('/nome', UsuarioadminController.alterarNome);
 
-  router.get('/minhasreservas', UsuarioadminController.renderMinhasreservas);
+    router.get('/minhasreservas', UsuarioadminController.renderMinhasreservas);
+    
+    router.delete("/minhasreservas/:id", UsuarioadminController.deleteMinhasReservas);
 
   router.get('/nome', UsuarioadminController.renderNome);
 

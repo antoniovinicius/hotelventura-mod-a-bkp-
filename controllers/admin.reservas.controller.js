@@ -39,7 +39,7 @@ async function criarReserva(req, res, next) {
     res.send(data);
 
 }).catch(err => {
-
+    console.log(err);
     res.status(400);
     res.send({
         error: err

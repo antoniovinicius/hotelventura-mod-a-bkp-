@@ -42,7 +42,35 @@ async function renderMinhasreservas(req, res, _next) {
         }
       )
     );
-  });
+  }).catch(err => {
+   
+    if (err.message === "Usuario nao esta logado") {
+      res.redirect("/login");
+    } else {
+      res.status(400);
+      res.send({
+        error: err
+    });
+    }
+    
+
+});
+}
+
+async function deleteMinhasReservas(req, res, next) {
+  site.reservasDelete(req).then(data => {
+
+    res.send(data);
+
+  }).catch(err => {
+  console.log(err);
+
+    res.status(400);
+    res.send({
+        error: err
+    });
+
+});
 }
 
 async function renderSenha(req, res, _next) {
@@ -123,4 +151,5 @@ module.exports = {
   renderNome,
   alterarNome,
   criarSenha,
+  deleteMinhasReservas
 };

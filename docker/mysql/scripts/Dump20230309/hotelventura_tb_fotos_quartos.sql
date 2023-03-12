@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS `tb_fotos_quartos`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tb_fotos_quartos` (
   `id_foto_quarto` int NOT NULL AUTO_INCREMENT,
-  `foto` varchar(45) DEFAULT NULL,
+  `foto` varchar(128) DEFAULT NULL,
   `fk_id_quarto` int DEFAULT NULL,
   PRIMARY KEY (`id_foto_quarto`),
   KEY `fk_id_quarto_idx` (`fk_id_quarto`),
